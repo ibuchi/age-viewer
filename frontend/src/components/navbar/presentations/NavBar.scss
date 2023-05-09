@@ -1,0 +1,57 @@
+@mixin boxSize($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+.header-nav {
+  @include boxSize(100vw, 60px);
+  background-color: rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  margin-bottom: 30px;
+  &--border {
+    @extend .header-nav;
+    box-shadow: none;
+    justify-content: space-between;
+    background-color: transparent;
+    max-width: 1440px;
+    margin: auto;
+  }
+}
+
+.navbar-logo {
+  display: flex;
+  height: 20px;
+  cursor: pointer;
+  &--img {
+    @include boxSize(20px, 20px);
+  }
+  &--text {
+    margin-left: 5px;
+  }
+}
+
+.nav-btns {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &--btn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+
+  }
+}
+
+.nav-drop {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.nav-btns--btn {
+  max-height: 100vh;
+  transition: all 0.3s;
+}

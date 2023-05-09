@@ -1,0 +1,66 @@
+$white: hsl(0, 0%, 100%);
+
+@mixin boxSize($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+.landing-background {
+  background-image: url("../../../assets/images/landing/age2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: "all 0.3s ease-in-out";
+  @include boxSize(100vw, 100vh);
+}
+
+.landing-border {
+  max-width: 1440px;
+  color: $white;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-logo {
+  @include boxSize(100px, 100px);
+}
+
+.landing-header {
+  margin-top: 10px;
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &--title {
+    color: white;
+  }
+}
+
+.landing-list {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 40px;
+  &--items {
+    margin-bottom: 10px;
+  }
+}
+
+// .landing-button {
+//   margin-top: 25px;
+//   cursor: pointer;
+// }
+
+.landing-block {
+  background-color: $white;
+  @include boxSize(100px, 5px);
+}

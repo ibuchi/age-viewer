@@ -17,17 +17,25 @@
  * under the License.
  */
 
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'antd/dist/antd.css';
-import './static/style.css';
-import './static/navbar-fixed-left.css';
-import MainPage from './pages/Main/MainPage';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Route, Switch, Redirect } from "react-router-dom";
+import "antd/dist/antd.css";
+import "./static/style.css";
+import "./static/navbar-fixed-left.css";
+import MainPage from "./pages/Main/MainPage";
+import LandingPage from "./pages/Landing/LandingPage";
 
-const App = () => (
-  <React.StrictMode>
-    <MainPage />
-  </React.StrictMode>
-);
+const App = () => {
+  return (
+    <React.StrictMode>
+      <Switch>
+        <Route path="/root" component={LandingPage} />
+        <Route path="/age-viewer" component={MainPage} />
+        <Redirect from="/" to="/root" />
+      </Switch>
+    </React.StrictMode>
+  );
+};
 
 export default App;

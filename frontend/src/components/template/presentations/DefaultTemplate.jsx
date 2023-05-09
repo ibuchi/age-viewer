@@ -17,20 +17,22 @@
  * under the License.
  */
 
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { Row, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import EditorContainer from '../../contents/containers/Editor';
-import Sidebar from '../../sidebar/containers/Sidebar';
-import Contents from '../../contents/containers/Contents';
-import Modal from '../../modal/containers/Modal';
-import { loadFromCookie, saveToCookie } from '../../../features/cookie/CookieUtil';
-import BuilderContainer from '../../query_builder/BuilderContainer';
-import './DefaultTemplate.scss';
-import KeyWordFinder from '../../../features/query_builder/KeyWordFinder';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { Row } from "react-bootstrap";
+import EditorContainer from "../../contents/containers/Editor";
+import Sidebar from "../../sidebar/containers/Sidebar";
+import Contents from "../../contents/containers/Contents";
+import Modal from "../../modal/containers/Modal";
+import {
+  loadFromCookie,
+  saveToCookie,
+} from "../../../features/cookie/CookieUtil";
+import BuilderContainer from "../../query_builder/BuilderContainer";
+import "./DefaultTemplate.scss";
+import KeyWordFinder from "../../../features/query_builder/KeyWordFinder";
+import NavBar from "../../navbar/presentations/NavBar";
 
 const DefaultTemplate = ({
   theme,
@@ -43,6 +45,7 @@ const DefaultTemplate = ({
 }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [openEditor, setOpenEditor] = useState(false);
   const [stateValues] = useState({
     theme,
     maxNumOfFrames,
@@ -54,9 +57,9 @@ const DefaultTemplate = ({
 
   useEffect(async () => {
     const req = {
-      method: 'GET',
+      method: "GET",
     };
-    const res = await fetch('/api/v1/miscellaneous', req);
+    const res = await fetch("/api/v1/miscellaneous", req);
     const results = await res.json();
     const kwFinder = KeyWordFinder.fromMatrix(results);
     setFinder(kwFinder);
@@ -75,7 +78,7 @@ const DefaultTemplate = ({
     Object.keys(stateValues).forEach((key) => {
       let fromCookieValue = loadFromCookie(key);
 
-      if (fromCookieValue !== undefined && key !== 'theme') {
+      if (fromCookieValue !== undefined && key !== "theme") {
         fromCookieValue = parseInt(fromCookieValue, 10);
       }
 
@@ -94,13 +97,13 @@ const DefaultTemplate = ({
 
   return (
     <div className="default-template">
-      { isOpen && <Modal /> }
+      {isOpen && <Modal />}
       <input
         type="radio"
         className="theme-switch"
         name="theme-switch"
         id="default-theme"
-        checked={theme === 'default'}
+        checked={theme === "default"}
         readOnly
       />
       <input
@@ -108,26 +111,26 @@ const DefaultTemplate = ({
         className="theme-switch"
         name="theme-switch"
         id="dark-theme"
-        checked={theme === 'dark'}
+        checked={theme === "dark"}
         readOnly
       />
-      <Row className="content-row">
-        <div>
-          <Button onClick={() => setOpen(true)}>
-            <FontAwesomeIcon icon={faBars} />
-          </Button>
-          <BuilderContainer open={open} setOpen={setOpen} finder={finder} />
-        </div>
-        <div className="editor-division wrapper-extension-padding">
-
-          <EditorContainer />
-          <Sidebar />
-          <Contents />
-
-        </div>
-
-      </Row>
-
+      <NavBar
+        setOpen={setOpen}
+        openEditor={openEditor}
+        setOpenEditor={setOpenEditor}
+      />
+      <div className="content-wrapper no-scroll-bar">
+        {openEditor && (
+          <Row className="content-row">
+            <div className="editor-division wrapper-extension-padding">
+              <EditorContainer />
+              <Sidebar />
+            </div>
+          </Row>
+        )}
+        <Contents />
+      </div>
+      <BuilderContainer open={open} setOpen={setOpen} finder={finder} />
     </div>
   );
 };

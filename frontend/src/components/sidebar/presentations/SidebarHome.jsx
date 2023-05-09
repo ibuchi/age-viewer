@@ -427,7 +427,7 @@ const SidebarHome = ({
         <div className="form-group sidebar-item-disconnect">
           <div className="sidebar-item-disconnect-buttons">
             <button
-              className="frame-head-button refresh_button btn btn-link"
+              className="frame-head-button btn btn-sm btn-primary"
               type="button"
               onClick={() => refreshSidebarHome()}
             >

@@ -17,8 +17,9 @@
  * under the License.
  */
 
-import React from 'react';
-import DefaultTemplate from '../../components/template/DefaultTemplate';
+import React from "react";
+import DefaultTemplate from "../../components/template/DefaultTemplate";
+import "../../App.css";
 
 const MainPage = () => <DefaultTemplate />;
 

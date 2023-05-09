@@ -103,3 +103,41 @@ To Connect to postgreSQL server running from Docker Container
 # License
 
 Apache AGE Viewer is licensed under the Apache License, Version 2.0. See LICENSE for the full license text.
+
+
+
+# My Version of Apache AGE Viewer
+
+## Apache AGE Viewer with Landing Page, Navigation Bar, and Routes
+
+This modified version of the Apache AGE Viewer project includes a number of new features and enhancements, such as an introductory landing page, a navigation bar, and custom routes.
+
+### Landing Page
+
+The landing page serves as an introduction to the Apache AGE Viewer project and provides users with an overview of its features. It includes a hero section with a background image, a heading, and a call-to-action button that invites users to "Get Started". 
+
+Clicking the "Get Started" button will take the user to the `localhost/root` route, which displays the main landing page content.
+
+### Navigation Bar
+
+To improve navigation throughout the application, we added a custom navigation bar that appears on every page. The navigation bar features the Apache AGE Viewer logo on the left, and two clickable text links on the right - "Generate Query" and "Create Query".
+
+### Routes
+
+In addition to the default `localhost` and `localhost/age-viewer` routes, we added a new `localhost/root` route to display the landing page content. This new route is now the default route when the server is started, and users will be redirected to this page when they visit `localhost`.
+
+### Age-Viewer Page
+
+The `localhost/age-viewer` page has been enhanced with new features and functionality, including an off-canvas query generator and a dropdown for creating queries. The off-canvas query generator appears when the user clicks on the "Generate Query" link in the navigation bar. The dropdown for creating queries appears when the user clicks on the "Create Query" link.
+
+### How to Run the Project
+
+To run the modified version of the Apache AGE Viewer project, follow these steps:
+
+1. Clone the project repository to your local machine.
+2. Install the necessary dependencies by running `npm install`.
+3. Start the server by running `npm start`.
+4. Open a web browser and navigate to `localhost` to view the landing page. Click the "Get Started" button to proceed to the `localhost/age-viewer` route and explore the rest of the application.
+
+Note that this modified version of the project requires the `react-router-dom` and `scss` packages as dependencies. These should be installed automatically when you run `npm install` in step 2.
+
