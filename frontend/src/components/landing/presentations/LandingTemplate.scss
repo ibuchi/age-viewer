@@ -55,11 +55,6 @@ $white: hsl(0, 0%, 100%);
   }
 }
 
-// .landing-button {
-//   margin-top: 25px;
-//   cursor: pointer;
-// }
-
 .landing-block {
   background-color: $white;
   @include boxSize(100px, 5px);

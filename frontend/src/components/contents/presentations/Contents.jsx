@@ -17,22 +17,26 @@
  * under the License.
  */
 
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import FramesContainer from '../containers/Frames';
-import styles from './Contents.module.scss';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import FramesContainer from "../containers/Frames";
+import styles from "./Contents.module.scss";
 
 const Contents = ({
-  database, isActive, getConnectionStatus, getMetaData, currentGraph,
+  database,
+  isActive,
+  getConnectionStatus,
+  getMetaData,
+  currentGraph,
 }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (database.status === 'init') {
+    if (database.status === "init") {
       dispatch(() => {
         getConnectionStatus().then((response) => {
-          if (response.type === 'database/getConnectionStatus/fulfilled') {
+          if (response.type === "database/getConnectionStatus/fulfilled") {
             getMetaData({ currentGraph });
             getMetaData();
           }
@@ -42,7 +46,7 @@ const Contents = ({
   }, [database.status]);
 
   return (
-    <div className={`${styles.Content} ${isActive ? styles.Expanded : ''}`}>
+    <div className={`${styles.Content} ${isActive ? styles.Expanded : ""}`}>
       <div>
         <FramesContainer />
       </div>

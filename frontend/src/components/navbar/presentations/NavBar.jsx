@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "./NavBar.scss";
 import AgeLogo from "../../../assets/images/landing/age-viewer.jpg";
 

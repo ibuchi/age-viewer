@@ -116,11 +116,11 @@ This modified version of the Apache AGE Viewer project includes a number of new 
 
 The landing page serves as an introduction to the Apache AGE Viewer project and provides users with an overview of its features. It includes a hero section with a background image, a heading, and a call-to-action button that invites users to "Get Started". 
 
-Clicking the "Get Started" button will take the user to the `localhost/root` route, which displays the main landing page content.
+Clicking the "Get Started" button will take the user to the `localhost/root` route, which displays the main page content.
 
 ### Navigation Bar
 
-To improve navigation throughout the application, we added a custom navigation bar that appears on every page. The navigation bar features the Apache AGE Viewer logo on the left, and two clickable text links on the right - "Generate Query" and "Create Query".
+To improve navigation throughout the application, we added a custom navigation bar. The navigation bar features the Apache AGE Viewer logo on the left, and two clickable text links on the right - "Generate Query" and "Create Query".
 
 ### Routes
 

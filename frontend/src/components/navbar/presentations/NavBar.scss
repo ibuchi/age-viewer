@@ -41,17 +41,5 @@
   &--btn:hover {
     cursor: pointer;
     text-decoration: underline;
-
   }
-}
-
-.nav-drop {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
-
-.nav-btns--btn {
-  max-height: 100vh;
-  transition: all 0.3s;
 }

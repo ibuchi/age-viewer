@@ -17,17 +17,17 @@
  * under the License.
  */
 
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import Contents from '../../frame/containers/ContentsFrameContainer';
-import ServerStatus from '../../frame/containers/ServerStatusContainer';
-import ServerConnect from '../../frame/containers/ServerConnectContainer';
-import ServerDisconnect from '../../frame/containers/ServerDisconnectContainer';
-import CypherGraphResult from '../../frame/containers/CypherGraphResultContainers';
-import CypherResult from '../../frame/containers/CypherResultContainers';
-import CSV from '../../csv';
-import { setting } from '../../../conf/config';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import Contents from "../../frame/containers/ContentsFrameContainer";
+import ServerStatus from "../../frame/containers/ServerStatusContainer";
+import ServerConnect from "../../frame/containers/ServerConnectContainer";
+import ServerDisconnect from "../../frame/containers/ServerDisconnectContainer";
+import CypherGraphResult from "../../frame/containers/CypherGraphResultContainers";
+import CypherResult from "../../frame/containers/CypherResultContainers";
+import CSV from "../../csv";
+import { setting } from "../../../conf/config";
 
 const Frames = ({
   database,
@@ -40,16 +40,18 @@ const Frames = ({
   const [frames, setFrames] = useState(null);
 
   useEffect(() => {
-    if (database.status === 'connected' && frameList.length === 0) {
+    if (database.status === "connected" && frameList.length === 0) {
       if (!setting.connectionStatusSkip) {
-        dispatch(() => addFrame(':server status', 'ServerStatus'));
+        dispatch(() => addFrame(":server status", "ServerStatus"));
       }
     }
 
-    if (database.status === 'disconnected') {
-      const serverConnectFrames = frameList.filter((frame) => (frame.frameName.toUpperCase() === 'SERVERCONNECT'));
+    if (database.status === "disconnected") {
+      const serverConnectFrames = frameList.filter(
+        (frame) => frame.frameName.toUpperCase() === "SERVERCONNECT"
+      );
       if (!setting.closeWhenDisconnect) {
-        dispatch(() => addFrame(':server connect', 'ServerConnect'));
+        dispatch(() => addFrame(":server connect", "ServerConnect"));
       } else if (serverConnectFrames.length === 0) {
         window.close();
       }
@@ -57,67 +59,26 @@ const Frames = ({
   }, [database.status]);
 
   useEffect(() => {
-    setFrames(frameList.map((frame, index) => {
-      if (index > maxNumOfFrames && maxNumOfFrames !== 0) {
-        return '';
-      }
+    setFrames(
+      frameList.map((frame, index) => {
+        if (index > maxNumOfFrames && maxNumOfFrames !== 0) {
+          return "";
+        }
 
-      if (frame.frameName === 'Contents') {
-        return (
-          <Contents
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            playTarget={frame.frameProps.playTarget}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
-      if (frame.frameName === 'CSV') {
-        return (
-          <CSV
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
-      if (frame.frameName === 'ServerStatus') {
-        return (
-          <ServerStatus
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
-      if (frame.frameName === 'ServerConnect') {
-        return (
-          <ServerConnect
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
-      if (frame.frameName === 'ServerDisconnect') {
-        return (
-          <ServerDisconnect
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
-      if (frame.frameName === 'CypherResultFrame') {
-        if (queryResult[frame.frameProps.key]?.complete && (queryResult[frame.frameProps.key].command !== null ? queryResult[frame.frameProps.key].command.toUpperCase() : 'NULL')
-          .match('(ERROR|GRAPH|CREATE|UPDATE|COPY|NULL).*')) {
+        if (frame.frameName === "Contents") {
           return (
-            <CypherResult
+            <Contents
+              key={frame.frameProps.key}
+              refKey={frame.frameProps.key}
+              reqString={frame.frameProps.reqString}
+              playTarget={frame.frameProps.playTarget}
+              isPinned={frame.isPinned}
+            />
+          );
+        }
+        if (frame.frameName === "CSV") {
+          return (
+            <CSV
               key={frame.frameProps.key}
               refKey={frame.frameProps.key}
               reqString={frame.frameProps.reqString}
@@ -125,24 +86,68 @@ const Frames = ({
             />
           );
         }
-        return (
-          <CypherGraphResult
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
-      return '';
-    }));
+        if (frame.frameName === "ServerStatus") {
+          return (
+            <ServerStatus
+              key={frame.frameProps.key}
+              refKey={frame.frameProps.key}
+              reqString={frame.frameProps.reqString}
+              isPinned={frame.isPinned}
+            />
+          );
+        }
+        if (frame.frameName === "ServerConnect") {
+          return (
+            <ServerConnect
+              key={frame.frameProps.key}
+              refKey={frame.frameProps.key}
+              reqString={frame.frameProps.reqString}
+              isPinned={frame.isPinned}
+            />
+          );
+        }
+        if (frame.frameName === "ServerDisconnect") {
+          return (
+            <ServerDisconnect
+              key={frame.frameProps.key}
+              refKey={frame.frameProps.key}
+              reqString={frame.frameProps.reqString}
+              isPinned={frame.isPinned}
+            />
+          );
+        }
+        if (frame.frameName === "CypherResultFrame") {
+          if (
+            queryResult[frame.frameProps.key]?.complete &&
+            (queryResult[frame.frameProps.key].command !== null
+              ? queryResult[frame.frameProps.key].command.toUpperCase()
+              : "NULL"
+            ).match("(ERROR|GRAPH|CREATE|UPDATE|COPY|NULL).*")
+          ) {
+            return (
+              <CypherResult
+                key={frame.frameProps.key}
+                refKey={frame.frameProps.key}
+                reqString={frame.frameProps.reqString}
+                isPinned={frame.isPinned}
+              />
+            );
+          }
+          return (
+            <CypherGraphResult
+              key={frame.frameProps.key}
+              refKey={frame.frameProps.key}
+              reqString={frame.frameProps.reqString}
+              isPinned={frame.isPinned}
+            />
+          );
+        }
+        return "";
+      })
+    );
   }, [frameList, queryResult]);
 
-  return (
-    <div className="container-fluid frame-area pt-3">
-      {frames}
-    </div>
-  );
+  return <div className="container-fluid frame-area pt-3">{frames}</div>;
 };
 
 Frames.defaultProps = {
@@ -163,7 +168,7 @@ Frames.propTypes = {
         playTarget: PropTypes.string,
       }).isRequired,
       isPinned: PropTypes.bool.isRequired,
-    }),
+    })
   ).isRequired,
   addFrame: PropTypes.func.isRequired,
   // todo: need to refactoring on management Cypher Results
